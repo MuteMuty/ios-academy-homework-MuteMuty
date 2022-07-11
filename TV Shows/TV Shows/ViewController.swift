@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
     }
 
 
