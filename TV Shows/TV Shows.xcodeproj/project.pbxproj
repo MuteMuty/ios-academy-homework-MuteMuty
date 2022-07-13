@@ -16,7 +16,6 @@
 		42064AC3287833D600E400FD /* TV_ShowsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42064AC2287833D600E400FD /* TV_ShowsUITestsLaunchTests.swift */; };
 		42064AD1287C234000E400FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42064AD0287C234000E400FD /* Login.storyboard */; };
 		42064AD3287C236F00E400FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42064AD2287C236F00E400FD /* LoginViewController.swift */; };
-		42064AD5287C733A00E400FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42064AD4287C733A00E400FD /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		42064AC2287833D600E400FD /* TV_ShowsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TV_ShowsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		42064AD0287C234000E400FD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		42064AD2287C236F00E400FD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		42064AD4287C733A00E400FD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +105,6 @@
 				42064AA8287833D500E400FD /* Assets.xcassets */,
 				42064AAA287833D500E400FD /* LaunchScreen.storyboard */,
 				42064AAD287833D500E400FD /* Info.plist */,
-				42064AD4287C733A00E400FD /* ViewController.swift */,
 			);
 			path = "TV Shows";
 			sourceTree = "<group>";
@@ -271,7 +268,6 @@
 			files = (
 				42064AD3287C236F00E400FD /* LoginViewController.swift in Sources */,
 				42064AA0287833D200E400FD /* AppDelegate.swift in Sources */,
-				42064AD5287C733A00E400FD /* ViewController.swift in Sources */,
 				42064AA2287833D200E400FD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
