@@ -7,96 +7,112 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
-    var counter:Int = 0
-    var fontSize:CGFloat = 20.0
-    var isSpinning:Bool = true
+    // MARK: - Outlets
     
-    @IBAction func countBtn(_ sender: Any) {
+    @IBOutlet private weak var counterLabel: UILabel!
+    @IBOutlet private weak var incrementButton: UIButton!
+    @IBOutlet private weak var decrementButton: UIButton!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    
+    // MARK: - Properties
+    
+    private var counter: Int = 0
+    private var fontSize: CGFloat = 20.0
+    private var isSpinning: Bool = true
+    
+    // MARK: - Lifecycle methods
+    
+    override func viewDidLoad() {
+        setUpUI()
+        animateSpinner()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction private func incrementButtonPressed() {
         counter += 1
         fontSize += 5.0
         isSpinning = !isSpinning
         if isSpinning {
-            indicator.stopAnimating()
+            loadingIndicator.stopAnimating()
         } else {
-            indicator.startAnimating()
+            loadingIndicator.startAnimating()
         }
-        let redC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let greenC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let blueC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        inc.layer.cornerRadius = 5
-        inc.layer.borderWidth = 3
-        inc.layer.borderColor = CGColor(
+        let redC: CGFloat = getColorValue()
+        let greenC: CGFloat = getColorValue()
+        let blueC: CGFloat = getColorValue()
+        incrementButton.layer.cornerRadius = 5
+        incrementButton.layer.borderWidth = 3
+        incrementButton.layer.borderColor = CGColor(
             red:   1.0 - redC,
             green: 1.0 - greenC,
             blue:  1.0 - blueC,
             alpha: 1.0
         )
-        inc.backgroundColor = UIColor(
+        incrementButton.backgroundColor = UIColor(
             red:   redC,
             green: greenC,
             blue:  blueC,
             alpha: 1.0
          )
-        inc.setTitleColor(UIColor(
+        incrementButton.setTitleColor(UIColor(
             red:   1.0 - redC,
             green: 1.0 - greenC,
             blue:  1.0 - blueC,
             alpha: 1.0
          ), for: .normal)
-        stringLabel.font = stringLabel.font.withSize(fontSize)
-        stringLabel.text = "\(counter)"
+        counterLabel.font = counterLabel.font.withSize(fontSize)
+        counterLabel.text = "\(counter)"
     }
-    @IBAction func decrementBtn(_ sender: Any) {
+    
+    @IBAction private func decrementButtonPressed() {
         counter > 0 ? counter -= 1 : nil
         fontSize -= 5.0
-        let redC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let greenC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        let blueC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
-        dec.layer.cornerRadius = 5
-        dec.layer.borderWidth = 3
-        dec.layer.borderColor = CGColor(
+        let redC: CGFloat = getColorValue()
+        let greenC: CGFloat = getColorValue()
+        let blueC: CGFloat = getColorValue()
+        decrementButton.layer.cornerRadius = 5
+        decrementButton.layer.borderWidth = 3
+        decrementButton.layer.borderColor = CGColor(
             red:   1.0 - redC,
             green: 1.0 - greenC,
             blue:  1.0 - blueC,
             alpha: 1.0
         )
-        dec.backgroundColor = UIColor(
+        decrementButton.backgroundColor = UIColor(
             red:   redC,
             green: greenC,
             blue:  blueC,
             alpha: 1.0
          )
-        dec.setTitleColor(UIColor(
+        decrementButton.setTitleColor(UIColor(
             red:   1.0 - redC,
             green: 1.0 - greenC,
             blue:  1.0 - blueC,
             alpha: 1.0
          ), for: .normal)
-        stringLabel.font = stringLabel.font.withSize(fontSize)
-        stringLabel.text = "\(counter)"
+        counterLabel.font = counterLabel.font.withSize(fontSize)
+        counterLabel.text = "\(counter)"
     }
     
-    @IBOutlet weak var stringLabel: UILabel!
-    @IBOutlet weak var inc: UIButton!
-    @IBOutlet weak var dec: UIButton!
-    @IBOutlet weak var indicator: UIActivityIndicatorView!
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = UIColor.cyan
-        inc.setImage(UIImage(named: "plus.png"), for: .normal)
-        inc.imageView?.contentMode = .scaleAspectFit
-        inc.contentHorizontalAlignment = .left;
-        inc.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        //indicator.startAnimating()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.indicator.stopAnimating()
-            self.isSpinning = false
-        }
+    // MARK: - Utility methods
 
+    private func getColorValue() -> CGFloat {
+        return CGFloat.random(in: 0..<1)
+    }
+    
+    private func setUpUI() {
+        view.backgroundColor = UIColor.cyan
+        incrementButton.setImage(UIImage(named: "plus.png"), for: .normal)
+    }
+    
+    private func animateSpinner() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [self] in
+            loadingIndicator.stopAnimating()
+            isSpinning = false
+        }
     }
     
 }
