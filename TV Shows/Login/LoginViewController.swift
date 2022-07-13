@@ -11,10 +11,17 @@ class LoginViewController: UIViewController {
     
     var counter:Int = 0
     var fontSize:CGFloat = 20.0
+    var isSpinning:Bool = true
     
     @IBAction func countBtn(_ sender: Any) {
         counter += 1
         fontSize += 5.0
+        isSpinning = !isSpinning
+        if isSpinning {
+            indicator.stopAnimating()
+        } else {
+            indicator.startAnimating()
+        }
         let redC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         let greenC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
         let blueC:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
@@ -74,11 +81,22 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var stringLabel: UILabel!
     @IBOutlet weak var inc: UIButton!
     @IBOutlet weak var dec: UIButton!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.cyan
+        inc.setImage(UIImage(named: "plus.png"), for: .normal)
+        inc.imageView?.contentMode = .scaleAspectFit
+        inc.contentHorizontalAlignment = .left;
+        inc.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        //indicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.indicator.stopAnimating()
+            self.isSpinning = false
+        }
+
     }
     
 }
