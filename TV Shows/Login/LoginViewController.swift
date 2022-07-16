@@ -105,7 +105,7 @@ final class LoginViewController: UIViewController {
     
     private func setUpUI() {
         view.backgroundColor = UIColor.cyan
-        incrementButton.setImage(UIImage(named: "plus.png"), for: .normal)
+        incrementButton.setImage(UIImage(named: "logo-white.pdf"), for: .normal)
     }
     
     private func animateSpinner() {
