@@ -36,19 +36,11 @@ final class LoginViewController: UIViewController {
     
     @IBAction func emailTextChanged() {
         email = emailTextField.text ?? ""
-        if !email.isEmpty && !password.isEmpty {
-            enableButtons()
-        } else {
-            disableButtons()
-        }
+        setButtons()
     }
     @IBAction func passwordTextChanged() {
         password = passwordTextField.text ?? ""
-        if !email.isEmpty && !password.isEmpty {
-            enableButtons()
-        } else {
-            disableButtons()
-        }
+        setButtons()
     }
     
     @IBAction func rememberMeButtonClicked() {
@@ -93,6 +85,16 @@ final class LoginViewController: UIViewController {
         loginButton.backgroundColor = UIColor(white: 1, alpha: 0.3)
         loginButton.setTitleColor(UIColor(white: 1, alpha: 0.4), for: .normal)
         registerButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+    }
+    
+    private func setButtons() {
+        if !email.isEmpty && !password.isEmpty {
+            enableButtons()
+        } else {
+            disableButtons()
+            loginButton.isEnabled = false
+            registerButton.isEnabled = false
+        }
     }
     
     @objc private func showPasswordButtonClicked() {
