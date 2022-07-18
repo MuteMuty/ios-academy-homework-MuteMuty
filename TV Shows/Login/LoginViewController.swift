@@ -11,91 +11,55 @@ final class LoginViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet private weak var counterLabel: UILabel!
-    @IBOutlet private weak var incrementButton: UIButton!
-    @IBOutlet private weak var decrementButton: UIButton!
-    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loginTextLabel: UILabel!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var rememberMeButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
     
     // MARK: - Properties
     
-    private var counter: Int = 0
-    private var fontSize: CGFloat = 20.0
-    private var isSpinning: Bool = true
+    private var email: String = ""
+    private var password: String = ""
+    private var isPasswordShown: Bool = false
+    private var isRememberMeClicked: Bool = false
+    private let button = UIButton(frame: CGRect(x: 100, y: 100, width: 24, height: 24))
     
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         setUpUI()
-        animateSpinner()
     }
     
     // MARK: - Actions
     
-    @IBAction private func incrementButtonPressed() {
-        counter += 1
-        fontSize += 5.0
-        isSpinning = !isSpinning
-        if isSpinning {
-            loadingIndicator.stopAnimating()
+    @IBAction func emailTextChanged() {
+        email = emailTextField.text ?? ""
+        if !email.isEmpty && !password.isEmpty {
+            enableButtons()
         } else {
-            loadingIndicator.startAnimating()
+            disableButtons()
         }
-        let redC: CGFloat = getColorValue()
-        let greenC: CGFloat = getColorValue()
-        let blueC: CGFloat = getColorValue()
-        incrementButton.layer.cornerRadius = 5
-        incrementButton.layer.borderWidth = 3
-        incrementButton.layer.borderColor = CGColor(
-            red:   1.0 - redC,
-            green: 1.0 - greenC,
-            blue:  1.0 - blueC,
-            alpha: 1.0
-        )
-        incrementButton.backgroundColor = UIColor(
-            red:   redC,
-            green: greenC,
-            blue:  blueC,
-            alpha: 1.0
-         )
-        incrementButton.setTitleColor(UIColor(
-            red:   1.0 - redC,
-            green: 1.0 - greenC,
-            blue:  1.0 - blueC,
-            alpha: 1.0
-         ), for: .normal)
-        counterLabel.font = counterLabel.font.withSize(fontSize)
-        counterLabel.text = "\(counter)"
+    }
+    @IBAction func passwordTextChanged() {
+        password = passwordTextField.text ?? ""
+        if !email.isEmpty && !password.isEmpty {
+            enableButtons()
+        } else {
+            disableButtons()
+        }
     }
     
-    @IBAction private func decrementButtonPressed() {
-        counter > 0 ? counter -= 1 : nil
-        fontSize -= 5.0
-        let redC: CGFloat = getColorValue()
-        let greenC: CGFloat = getColorValue()
-        let blueC: CGFloat = getColorValue()
-        decrementButton.layer.cornerRadius = 5
-        decrementButton.layer.borderWidth = 3
-        decrementButton.layer.borderColor = CGColor(
-            red:   1.0 - redC,
-            green: 1.0 - greenC,
-            blue:  1.0 - blueC,
-            alpha: 1.0
-        )
-        decrementButton.backgroundColor = UIColor(
-            red:   redC,
-            green: greenC,
-            blue:  blueC,
-            alpha: 1.0
-         )
-        decrementButton.setTitleColor(UIColor(
-            red:   1.0 - redC,
-            green: 1.0 - greenC,
-            blue:  1.0 - blueC,
-            alpha: 1.0
-         ), for: .normal)
-        counterLabel.font = counterLabel.font.withSize(fontSize)
-        counterLabel.text = "\(counter)"
+    @IBAction func rememberMeButtonClicked() {
+        if !isRememberMeClicked {
+            rememberMeButton.setImage(UIImage(named: "ic-checkbox-selected.pdf"), for: .normal)
+        } else {
+            rememberMeButton.setImage(UIImage(named: "ic-checkbox-unselected.pdf"), for: .normal)
+        }
+        isRememberMeClicked = !isRememberMeClicked
     }
+    
     
     // MARK: - Utility methods
 
@@ -104,15 +68,59 @@ final class LoginViewController: UIViewController {
     }
     
     private func setUpUI() {
-        view.backgroundColor = UIColor.cyan
-        incrementButton.setImage(UIImage(named: "logo-white.pdf"), for: .normal)
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(named: "ic-visible.pdf") as UIImage?, for: .normal)
+        button.addTarget(self, action: #selector(self.showPasswordButtonClicked), for: .touchUpInside)
+        passwordTextField.rightViewMode = UITextField.ViewMode.always
+        passwordTextField.rightView = button
+        disableButtons()
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
     }
     
-    private func animateSpinner() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [self] in
-            loadingIndicator.stopAnimating()
-            isSpinning = false
+    private func enableButtons() {
+        loginButton.isEnabled = true
+        registerButton.isEnabled = true
+        loginButton.backgroundColor = UIColor(white: 1, alpha: 1)
+        //loginButton.setTitleColor(UIColor(red: 82, green: 54, blue: 140, alpha: 1), for: .normal)
+        loginButton.setTitleColor(UIColor(white: 0.2, alpha: 1), for: .normal)
+        registerButton.setTitleColor(UIColor(white: 1, alpha: 1), for: .normal)
+    }
+    
+    private func disableButtons() {
+        loginButton.backgroundColor = UIColor(white: 1, alpha: 0.3)
+        loginButton.setTitleColor(UIColor(white: 1, alpha: 0.4), for: .normal)
+        registerButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+    }
+    
+    @objc private func showPasswordButtonClicked() {
+        if !isPasswordShown {
+            button.setImage(UIImage(named: "ic-invisible.pdf") as UIImage?, for: .normal)
+            passwordTextField.isSecureTextEntry = false
+        } else {
+            button.setImage(UIImage(named: "ic-visible.pdf") as UIImage?, for: .normal)
+            passwordTextField.isSecureTextEntry = true
+        }
+        isPasswordShown = !isPasswordShown
+    }
+    
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.switchBasedNextTextField(textField)
+        return true
+    }
+    
+    private func switchBasedNextTextField(_ textField: UITextField) {
+        switch textField {
+        case self.emailTextField:
+            self.passwordTextField.becomeFirstResponder()
+        default:
+            self.passwordTextField.resignFirstResponder()
         }
     }
-    
 }
