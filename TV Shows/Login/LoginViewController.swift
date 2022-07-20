@@ -75,7 +75,9 @@ final class LoginViewController: UIViewController {
     }
     
     private func setButtons() {
-        if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty {
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        if !email.isEmpty && !password.isEmpty {
             enableButtons()
             loginButton.backgroundColor = UIColor(white: 1, alpha: 1)
         } else {
