@@ -16,7 +16,8 @@
 		42064AC3287833D600E400FD /* TV_ShowsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42064AC2287833D600E400FD /* TV_ShowsUITestsLaunchTests.swift */; };
 		42064AD1287C234000E400FD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42064AD0287C234000E400FD /* Login.storyboard */; };
 		42064AD3287C236F00E400FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42064AD2287C236F00E400FD /* LoginViewController.swift */; };
-		424E53BA2882B90C00D444C9 /* sf-pro-display-cufonfonts in Resources */ = {isa = PBXBuildFile; fileRef = 424E53B92882B90C00D444C9 /* sf-pro-display-cufonfonts */; };
+		424E53BF28882C4500D444C9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 424E53BE28882C4500D444C9 /* Home.storyboard */; };
+		424E53C128882C8100D444C9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53C028882C8100D444C9 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,8 @@
 		42064AC2287833D600E400FD /* TV_ShowsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TV_ShowsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		42064AD0287C234000E400FD /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		42064AD2287C236F00E400FD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		424E53B92882B90C00D444C9 /* sf-pro-display-cufonfonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "sf-pro-display-cufonfonts"; path = "../../../Downloads/sf-pro-display-cufonfonts"; sourceTree = "<group>"; };
+		424E53BE28882C4500D444C9 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		424E53C028882C8100D444C9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +83,7 @@
 		42064A93287833D200E400FD = {
 			isa = PBXGroup;
 			children = (
-				424E53B92882B90C00D444C9 /* sf-pro-display-cufonfonts */,
+				424E53BB28882BB400D444C9 /* Home */,
 				42064ACF287C229700E400FD /* Login */,
 				42064A9E287833D200E400FD /* TV Shows */,
 				42064AB5287833D600E400FD /* TV ShowsTests */,
@@ -136,6 +138,15 @@
 				42064AD2287C236F00E400FD /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		424E53BB28882BB400D444C9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				424E53BE28882C4500D444C9 /* Home.storyboard */,
+				424E53C028882C8100D444C9 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,9 +254,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				42064AAC287833D500E400FD /* LaunchScreen.storyboard in Resources */,
-				424E53BA2882B90C00D444C9 /* sf-pro-display-cufonfonts in Resources */,
 				42064AA9287833D500E400FD /* Assets.xcassets in Resources */,
 				42064AD1287C234000E400FD /* Login.storyboard in Resources */,
+				424E53BF28882C4500D444C9 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +284,7 @@
 				42064AD3287C236F00E400FD /* LoginViewController.swift in Sources */,
 				42064AA0287833D200E400FD /* AppDelegate.swift in Sources */,
 				42064AA2287833D200E400FD /* SceneDelegate.swift in Sources */,
+				424E53C128882C8100D444C9 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
