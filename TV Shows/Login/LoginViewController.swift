@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MBProgressHUD
+import Alamofire
 
 final class LoginViewController: UIViewController {
     
@@ -42,6 +44,95 @@ final class LoginViewController: UIViewController {
     @IBAction func rememberMeButtonClicked() {
         rememberMeButton.setImage(UIImage(named: isRememberMeClicked ? "ic-checkbox-unselected.pdf" : "ic-checkbox-selected.pdf"), for: .normal)
         isRememberMeClicked.toggle()
+    }
+    
+    @IBAction func loginButtonClicked() {
+        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users/sign_in",
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseJSON { [weak self] dataResponse in
+                guard let self = self else { return }
+                switch dataResponse.result {
+                case .success(let response):
+                    guard
+                        let jsonDict = response as? Dictionary<String, Any>,
+                        let dataDict = jsonDict["user"],
+                        let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict)
+                    else { return }
+                    do {
+                        let user = try JSONDecoder().decode(User.self, from: dataBinary)
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                        self.navigationController?.setViewControllers([homeViewController], animated: true)
+                        print("Success: \(user)")
+                    } catch let error {
+                        print("Serialization error: \(error)")
+                    }
+                case .failure(let error):
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    print("API failure: \(error)")
+                }
+            }
+    }
+    
+    @IBAction func registerButtonClicked() {
+        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password,
+            "password_confirmation": password
+        ]
+        
+        AF
+            .request(
+                "https://tv-shows.infinum.academy/users",
+                method: .post,
+                parameters: parameters,
+                encoder: JSONParameterEncoder.default
+            )
+            .validate()
+            .responseJSON { [weak self] dataResponse in
+                guard let self = self else { return }
+                switch dataResponse.result {
+                case .success(let response):
+                    guard
+                        let jsonDict = response as? Dictionary<String, Any>,
+                        let dataDict = jsonDict["user"],
+                        let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict)
+                    else { return }
+                    do {
+                        let user = try JSONDecoder().decode(User.self, from: dataBinary)
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                        self.navigationController?.setViewControllers([homeViewController], animated: true)
+                        print("Success: \(user)")
+                    } catch let error {
+                        print("Serialization error: \(error)")
+                    }
+                case .failure(let error):
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    print("API failure: \(error)")
+                }
+            }
     }
     
     
