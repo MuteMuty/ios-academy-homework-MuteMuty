@@ -25,6 +25,7 @@ final class LoginViewController: UIViewController {
     private var isPasswordShown: Bool = false
     private var isRememberMeClicked: Bool = false
     private let passwordVisibilityButton = UIButton()
+    private var service = Service()
     
     // MARK: - Lifecycle methods
     
@@ -53,41 +54,19 @@ final class LoginViewController: UIViewController {
         MBProgressHUD.showAdded(to: view, animated: true)
         
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password
-        ]
         
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users/sign_in",
-                method: .post,
-                parameters: parameters,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseJSON { [weak self] dataResponse in
-                guard let self = self else { return }
-                switch dataResponse.result {
-                case .success(let response):
-                    guard
-                        let jsonDict = response as? Dictionary<String, Any>,
-                        let dataDict = jsonDict["user"],
-                        let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict)
-                    else { return }
-                    do {
-                        let user = try JSONDecoder().decode(User.self, from: dataBinary)
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                        self.navigationController?.setViewControllers([homeViewController], animated: true)
-                        print("Success: \(user)")
-                    } catch let error {
-                        print("Serialization error: \(error)")
-                    }
-                case .failure(let error):
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                    print("API failure: \(error)")
-                }
+        service.login(email: email, password: password) {  [weak self] dataResponse in
+            guard let self = self else { return }
+            
+            switch dataResponse.result {
+            case .success:
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.navigationController?.setViewControllers([homeViewController], animated: true)
+            case .failure(let error):
+                MBProgressHUD.hide(for: self.view, animated: true)
+                print("API failure: \(error)")
             }
+        }
     }
     
     @IBAction func registerButtonClicked() {
@@ -97,50 +76,23 @@ final class LoginViewController: UIViewController {
         MBProgressHUD.showAdded(to: view, animated: true)
         
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
-        let parameters: [String: String] = [
-            "email": email,
-            "password": password,
-            "password_confirmation": password
-        ]
         
-        AF
-            .request(
-                "https://tv-shows.infinum.academy/users",
-                method: .post,
-                parameters: parameters,
-                encoder: JSONParameterEncoder.default
-            )
-            .validate()
-            .responseJSON { [weak self] dataResponse in
-                guard let self = self else { return }
-                switch dataResponse.result {
-                case .success(let response):
-                    guard
-                        let jsonDict = response as? Dictionary<String, Any>,
-                        let dataDict = jsonDict["user"],
-                        let dataBinary = try? JSONSerialization.data(withJSONObject: dataDict)
-                    else { return }
-                    do {
-                        let user = try JSONDecoder().decode(User.self, from: dataBinary)
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                        self.navigationController?.setViewControllers([homeViewController], animated: true)
-                        print("Success: \(user)")
-                    } catch let error {
-                        print("Serialization error: \(error)")
-                    }
-                case .failure(let error):
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                    print("API failure: \(error)")
-                }
+        service.register(email: email, password: password) {  [weak self] dataResponse in
+            guard let self = self else { return }
+            
+            switch dataResponse.result {
+            case .success:
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.navigationController?.setViewControllers([homeViewController], animated: true)
+            case .failure(let error):
+                MBProgressHUD.hide(for: self.view, animated: true)
+                print("API failure: \(error)")
             }
+        }
     }
     
     
     // MARK: - Utility methods
-
-    private func getColorValue() -> CGFloat {
-        return CGFloat.random(in: 0..<1)
-    }
     
     private func setUpUI() {
         passwordVisibilityButton.setTitle("", for: .normal)

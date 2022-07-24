@@ -20,6 +20,9 @@
 		424E53BF28882C4500D444C9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 424E53BE28882C4500D444C9 /* Home.storyboard */; };
 		424E53C128882C8100D444C9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53C028882C8100D444C9 /* HomeViewController.swift */; };
 		424E53C32888A88400D444C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53C22888A88400D444C9 /* User.swift */; };
+		424E53C7288D835A00D444C9 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53C6288D835A00D444C9 /* Service.swift */; };
+		424E53C9288D840600D444C9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53C8288D840600D444C9 /* Router.swift */; };
+		424E53CB288D845900D444C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53CA288D845900D444C9 /* Constants.swift */; };
 		5ABB7F58218967C996E3984D /* Pods_TV_Shows_TV_ShowsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6F65FC5DD286E530F16656 /* Pods_TV_Shows_TV_ShowsUITests.framework */; };
 		9AD0E9A3C926589C853B74FE /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD696F12A01BA1431C9C17A /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +63,9 @@
 		424E53BE28882C4500D444C9 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		424E53C028882C8100D444C9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		424E53C22888A88400D444C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		424E53C6288D835A00D444C9 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		424E53C8288D840600D444C9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		424E53CA288D845900D444C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5D6ED43880881010541FCF33 /* Pods-TV ShowsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV ShowsTests.release.xcconfig"; path = "Target Support Files/Pods-TV ShowsTests/Pods-TV ShowsTests.release.xcconfig"; sourceTree = "<group>"; };
 		806E49F941A3EF583114A8E9 /* Pods_TV_ShowsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_ShowsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C36EB0463862B1095B2D23 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +162,9 @@
 				42064AD0287C234000E400FD /* Login.storyboard */,
 				42064AD2287C236F00E400FD /* LoginViewController.swift */,
 				424E53C22888A88400D444C9 /* User.swift */,
+				424E53C6288D835A00D444C9 /* Service.swift */,
+				424E53C8288D840600D444C9 /* Router.swift */,
+				424E53CA288D845900D444C9 /* Constants.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -432,11 +441,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				424E53C7288D835A00D444C9 /* Service.swift in Sources */,
 				42064AD3287C236F00E400FD /* LoginViewController.swift in Sources */,
 				42064AA0287833D200E400FD /* AppDelegate.swift in Sources */,
+				424E53C9288D840600D444C9 /* Router.swift in Sources */,
 				42064AA2287833D200E400FD /* SceneDelegate.swift in Sources */,
 				424E53C32888A88400D444C9 /* User.swift in Sources */,
 				424E53C128882C8100D444C9 /* HomeViewController.swift in Sources */,
+				424E53CB288D845900D444C9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
