@@ -60,12 +60,11 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success:
-                MBProgressHUD.hide(for: self.view, animated: true)
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure(let error):
-                MBProgressHUD.hide(for: self.view, animated: true)
                 print("API failure: \(error)")
             }
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
@@ -82,12 +81,11 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success:
-                MBProgressHUD.hide(for: self.view, animated: true)
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure(let error):
-                MBProgressHUD.hide(for: self.view, animated: true)
                 print("API failure: \(error)")
             }
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
