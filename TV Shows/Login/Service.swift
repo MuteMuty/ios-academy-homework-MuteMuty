@@ -10,7 +10,7 @@ import Alamofire
 
 final class Service {
     
-    func register(email: String, password: String ,completion: @escaping (DataResponse<UserResponse, AFError>) -> Void) {
+    func register(email: String, password: String, completion: @escaping (DataResponse<UserResponse, AFError>) -> Void) {
         
         AF
             .request(Router.register(email: email, password: password))
@@ -20,7 +20,7 @@ final class Service {
             }
     }
     
-    func login(email: String, password: String,completion: @escaping (DataResponse<UserResponse, AFError>) -> Void) {
+    func login(email: String, password: String, completion: @escaping (DataResponse<UserResponse, AFError>) -> Void) {
                 
         AF
             .request(Router.login(email: email, password: password))
