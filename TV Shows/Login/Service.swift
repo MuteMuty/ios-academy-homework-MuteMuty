@@ -30,4 +30,14 @@ final class Service {
             }
     }
     
+    func getShows(page: Int, completion: @escaping (DataResponse<ShowsResponse, AFError>) -> Void) {
+        
+        AF
+            .request(Router.shows(page: page))
+            .validate()
+            .responseDecodable(of: ShowsResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
 }

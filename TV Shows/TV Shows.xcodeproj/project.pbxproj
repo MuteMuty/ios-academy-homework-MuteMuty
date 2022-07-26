@@ -24,6 +24,9 @@
 		424E53C9288D840600D444C9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53C8288D840600D444C9 /* Router.swift */; };
 		424E53CB288D845900D444C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53CA288D845900D444C9 /* Constants.swift */; };
 		424E53CE288EC3D700D444C9 /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53CD288EC3D700D444C9 /* AuthInfo.swift */; };
+		424E53D0288FEC1900D444C9 /* ShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53CF288FEC1900D444C9 /* ShowsResponse.swift */; };
+		424E53D228900C4E00D444C9 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53D128900C4E00D444C9 /* SessionManager.swift */; };
+		424E53D52890262900D444C9 /* ShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E53D42890262900D444C9 /* ShowTableViewCell.swift */; };
 		5ABB7F58218967C996E3984D /* Pods_TV_Shows_TV_ShowsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6F65FC5DD286E530F16656 /* Pods_TV_Shows_TV_ShowsUITests.framework */; };
 		9AD0E9A3C926589C853B74FE /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD696F12A01BA1431C9C17A /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +71,9 @@
 		424E53C8288D840600D444C9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		424E53CA288D845900D444C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		424E53CD288EC3D700D444C9 /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
+		424E53CF288FEC1900D444C9 /* ShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsResponse.swift; sourceTree = "<group>"; };
+		424E53D128900C4E00D444C9 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		424E53D42890262900D444C9 /* ShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTableViewCell.swift; sourceTree = "<group>"; };
 		5D6ED43880881010541FCF33 /* Pods-TV ShowsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV ShowsTests.release.xcconfig"; path = "Target Support Files/Pods-TV ShowsTests/Pods-TV ShowsTests.release.xcconfig"; sourceTree = "<group>"; };
 		806E49F941A3EF583114A8E9 /* Pods_TV_ShowsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_ShowsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C36EB0463862B1095B2D23 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 				424E53C6288D835A00D444C9 /* Service.swift */,
 				424E53C8288D840600D444C9 /* Router.swift */,
 				424E53CA288D845900D444C9 /* Constants.swift */,
+				424E53D128900C4E00D444C9 /* SessionManager.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 		424E53BB28882BB400D444C9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				424E53D32890261000D444C9 /* Cells */,
 				424E53BE28882C4500D444C9 /* Home.storyboard */,
 				424E53C028882C8100D444C9 /* HomeViewController.swift */,
 			);
@@ -185,8 +193,17 @@
 			children = (
 				424E53C22888A88400D444C9 /* User.swift */,
 				424E53CD288EC3D700D444C9 /* AuthInfo.swift */,
+				424E53CF288FEC1900D444C9 /* ShowsResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		424E53D32890261000D444C9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				424E53D42890262900D444C9 /* ShowTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		983E46D714547B7D0A2CE5BE /* Frameworks */ = {
@@ -458,9 +475,12 @@
 				424E53C9288D840600D444C9 /* Router.swift in Sources */,
 				42064AA2287833D200E400FD /* SceneDelegate.swift in Sources */,
 				424E53C32888A88400D444C9 /* User.swift in Sources */,
+				424E53D52890262900D444C9 /* ShowTableViewCell.swift in Sources */,
 				424E53C128882C8100D444C9 /* HomeViewController.swift in Sources */,
+				424E53D0288FEC1900D444C9 /* ShowsResponse.swift in Sources */,
 				424E53CB288D845900D444C9 /* Constants.swift in Sources */,
 				424E53CE288EC3D700D444C9 /* AuthInfo.swift in Sources */,
+				424E53D228900C4E00D444C9 /* SessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@ enum Router : URLRequestConvertible {
     
     case login(email: String, password: String)
     case register(email: String, password: String)
+    case shows(page: Int)
     
     var path : String {
         switch self {
@@ -19,33 +20,55 @@ enum Router : URLRequestConvertible {
             return "/users/sign_in"
         case .register:
             return "/users"
+        case .shows:
+            return "/shows"
         }
     }
     
     var method : HTTPMethod {
-        return .post
+        switch self {
+        case .login, .register:
+            return .post
+        case .shows:
+            return .get
+        }
     }
     
     var parameters : [String: String] {
         switch self {
         case .login(let email, let password):
             return [
-                "email" : email,
-                "password" : password
+                "email": email,
+                "password": password
             ]
         case .register(let email, let password):
             return [
-                "email" : email,
-                "password" : password,
-                "password_confirmation" : password
+                "email": email,
+                "password": password,
+                "password_confirmation": password
+            ]
+        case .shows(let page):
+            return [
+                "page": "\(page)",
+                "items": "20"
             ]
         }
     }
         
     func asURLRequest() throws -> URLRequest {
-        var urlRequest = try URLRequest(url: Constants.API.baseURL + path, method: method , headers: HTTPHeaders([:]))
+        let headers = SessionManager.shared.authInfo?.headers ?? [:]
+        var urlRequest = try URLRequest(
+            url: Constants.API.baseURL + path,
+            method: method,
+            headers: HTTPHeaders(headers)
+        )
         
-        urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        switch self {
+        case .login, .register:
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .shows:
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        }
         
         return urlRequest
     }

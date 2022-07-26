@@ -50,7 +50,7 @@ final class LoginViewController: UIViewController {
     
     @IBAction func loginButtonClicked() {
         let storyBoard = UIStoryboard(name: "Home", bundle: nil)
-        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
@@ -58,20 +58,27 @@ final class LoginViewController: UIViewController {
         
         service.login(email: email, password: password) {  [weak self] dataResponse in
             guard let self = self else { return }
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             switch dataResponse.result {
-            case .success:
+            case .success(let userResponse):
+                let headers = dataResponse.response?.headers.dictionary ?? [:]
+                let authInfo = self.handleSuccessfulLogin(headers: headers)
+                SessionManager.shared.storeAuthInfo(headers: headers)
+                homeViewController.user = userResponse.user
+                homeViewController.authInfo = authInfo
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
-            case .failure(let error):
-                print("API failure: \(error)")
+            case .failure:
+                let alert = UIAlertController(title: "", message: "Invalid login credentials. Please try again.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true, completion: nil)
             }
-            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
     @IBAction func registerButtonClicked() {
         let storyBoard = UIStoryboard(name: "Home", bundle: nil)
-        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
@@ -79,14 +86,20 @@ final class LoginViewController: UIViewController {
         
         service.register(email: email, password: password) {  [weak self] dataResponse in
             guard let self = self else { return }
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             switch dataResponse.result {
-            case .success:
+            case .success(let userResponse):
+                let headers = dataResponse.response?.headers.dictionary ?? [:]
+                let authInfo = self.handleSuccessfulLogin(headers: headers)
+                homeViewController.user = userResponse.user
+                homeViewController.authInfo = authInfo
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
-            case .failure(let error):
-                print("API failure: \(error)")
+            case .failure:
+                let alert = UIAlertController(title: "", message: "Email is not an email.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true, completion: nil)
             }
-            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     
@@ -134,6 +147,13 @@ final class LoginViewController: UIViewController {
         isPasswordShown.toggle()
     }
     
+    private func handleSuccessfulLogin(headers: [String: String]) -> AuthInfo {
+        guard let authInfo = try? AuthInfo(headers: headers) else {
+            return try! AuthInfo(headers: [:])
+        }
+        return authInfo
+    }
+    
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -153,7 +173,9 @@ extension LoginViewController: UITextFieldDelegate {
     }
 }
 
-extension UIViewController {func dismissKeyboard() {
+extension UIViewController {
+    
+    func dismissKeyboard() {
        let tap: UITapGestureRecognizer = UITapGestureRecognizer( target: self, action: #selector(UIViewController.dismissKeyboardTouchOutside))
        tap.cancelsTouchesInView = false
        view.addGestureRecognizer(tap)
