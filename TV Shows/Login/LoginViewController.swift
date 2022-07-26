@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import MBProgressHUD
+import Alamofire
 
 final class LoginViewController: UIViewController {
     
@@ -23,6 +25,7 @@ final class LoginViewController: UIViewController {
     private var isPasswordShown: Bool = false
     private var isRememberMeClicked: Bool = false
     private let passwordVisibilityButton = UIButton()
+    private var service = Service()
     
     // MARK: - Lifecycle methods
     
@@ -44,12 +47,50 @@ final class LoginViewController: UIViewController {
         isRememberMeClicked.toggle()
     }
     
+    @IBAction func loginButtonClicked() {
+        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        
+        service.login(email: email, password: password) {  [weak self] dataResponse in
+            guard let self = self else { return }
+            
+            switch dataResponse.result {
+            case .success:
+                self.navigationController?.setViewControllers([homeViewController], animated: true)
+            case .failure(let error):
+                print("API failure: \(error)")
+            }
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+    
+    @IBAction func registerButtonClicked() {
+        let storyBoard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController")
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        
+        service.register(email: email, password: password) {  [weak self] dataResponse in
+            guard let self = self else { return }
+            
+            switch dataResponse.result {
+            case .success:
+                self.navigationController?.setViewControllers([homeViewController], animated: true)
+            case .failure(let error):
+                print("API failure: \(error)")
+            }
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+    
     
     // MARK: - Utility methods
-
-    private func getColorValue() -> CGFloat {
-        return CGFloat.random(in: 0..<1)
-    }
     
     private func setUpUI() {
         passwordVisibilityButton.setTitle("", for: .normal)
