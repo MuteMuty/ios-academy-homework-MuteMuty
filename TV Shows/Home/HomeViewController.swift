@@ -14,10 +14,13 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: - Properties
+    // MARK: - Public Properties
     
     var user: User?
     var authInfo: AuthInfo?
+    
+    // MARK: - Private Properties
+    
     private var shows: [Show] = []
     private var service: Service = Service()
     private var allPages: Int = 1
@@ -26,19 +29,18 @@ final class HomeViewController: UIViewController {
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
+        setUpView()
+    }
+    
+    // MARK: - Utility methods
+    
+    private func setUpView() {
         MBProgressHUD.showAdded(to: view, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.dataSource = self
         tableView.delegate = self
-        
         getShows(page: currentPage)
     }
-    
-    // MARK: - Actions
-    
-    
-    
-    // MARK: - Utility methods
     
     private func getShows(page: Int) {
         service.getShows(page: page) {  [weak self] dataResponse in
@@ -67,10 +69,9 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: "ShowTableViewCell", for: indexPath
+            withIdentifier: String(describing: ShowTableViewCell.self), for: indexPath
         ) as! ShowTableViewCell
-        cell.thumbnailImageView.image = UIImage(named: "ic-profile.pdf")
-        cell.titleLabel.text = shows[indexPath.row].title
+        cell.setup(with: ShowItem(showTitle: shows[indexPath.row].title, image: UIImage(named: "ic-profile.pdf")))
         
         return cell
     }

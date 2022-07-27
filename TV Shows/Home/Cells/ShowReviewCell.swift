@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct ShowReviewItem {
+    let profileImage: UIImage?
+    let email: String
+    let review: String?
+}
+
 final class ShowReviewCell: UITableViewCell {
     
     // MARK: - Outlets
@@ -34,5 +40,12 @@ final class ShowReviewCell: UITableViewCell {
         emailLabel.text = "neki@neki.neki"
         ratingView.setRoundedRating(4.0)
         reviewLable.text = "sfsd  sdfds sdf f dsaas sa ds dsg dvs dsf fds  dsf dsfsfa a sf saa dsasd a ds sadsa d"
+    }
+    
+    func setup(with item: ShowReviewItem) {
+        profileImage.image = item.profileImage
+        emailLabel.text = item.email
+        ratingView.setRoundedRating(4.0)
+        reviewLable.text = item.review
     }
 }

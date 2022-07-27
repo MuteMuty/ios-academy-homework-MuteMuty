@@ -62,16 +62,11 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success(let userResponse):
-                let headers = dataResponse.response?.headers.dictionary ?? [:]
-                let authInfo = self.handleSuccessfulLogin(headers: headers)
-                SessionManager.shared.storeAuthInfo(headers: headers)
+                SessionManager.shared.storeAuthInfo(dataResponse: dataResponse)
                 homeViewController.user = userResponse.user
-                homeViewController.authInfo = authInfo
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:
-                let alert = UIAlertController(title: "", message: "Invalid login credentials. Please try again.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(alert, animated: true, completion: nil)
+                self.showAlter(message: "Invalid login credentials. Please try again.")
             }
         }
     }
@@ -90,15 +85,11 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success(let userResponse):
-                let headers = dataResponse.response?.headers.dictionary ?? [:]
-                let authInfo = self.handleSuccessfulLogin(headers: headers)
+                SessionManager.shared.storeAuthInfo(dataResponse: dataResponse)
                 homeViewController.user = userResponse.user
-                homeViewController.authInfo = authInfo
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:
-                let alert = UIAlertController(title: "", message: "Email is not an email.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(alert, animated: true, completion: nil)
+                self.showAlter(message: "Email is not an email.")
             }
         }
     }

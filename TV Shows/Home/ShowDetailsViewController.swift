@@ -65,6 +65,7 @@ class ShowDetailsViewController: UIViewController {
                 self.allPages = reviewResponse.meta.pagination.pages
                 self.currentPage = reviewResponse.meta.pagination.page
                 self.reviews.append(contentsOf: reviewResponse.reviews)
+                self.tableView.reloadData()
                 print(self.reviews.count)
                 print("success!")
             case .failure:
@@ -80,7 +81,6 @@ class ShowDetailsViewController: UIViewController {
 extension ShowDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("REVIEWS: \(reviews)")
         return reviews.count + 1
     }
     
@@ -90,9 +90,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
                 withIdentifier: String(describing: ShowInfoCell.self), for: indexPath
             ) as! ShowInfoCell
             
-            infoCell.showImage.image = UIImage(named: "ic-profile.pdf")
-            infoCell.showDescriptionLabel.text = show?.description
-            infoCell.show = show
+            infoCell.setup(with: ShowInfoItem(image: UIImage(named: "ic-profile.pdf"), showDescription: (show?.description)!, show: show!))
             
             return infoCell
         } else {
@@ -101,9 +99,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
             ) as! ShowReviewCell
             
             let review = reviews[indexPath.row - 1]
-            reviewCell.profileImage.image = UIImage(named: "ic-profile")
-            reviewCell.emailLabel.text = review.user.email
-            reviewCell.reviewLable.text = review.comment
+            reviewCell.setup(with: ShowReviewItem(profileImage: UIImage(named: "ic-profile.pdf"), email: review.user.email, review: review.comment))
             
             if currentPage < allPages && indexPath.row == reviews.count - 1 {
                 currentPage += 1

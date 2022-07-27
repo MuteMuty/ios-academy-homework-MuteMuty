@@ -7,13 +7,19 @@
 
 import UIKit
 
+struct ShowInfoItem {
+    let image: UIImage?
+    let showDescription: String
+    let show: Show
+}
+
 final class ShowInfoCell: UITableViewCell {
     
     // MARK: - Outlets
     
     @IBOutlet weak var showImage: UIImageView!
     @IBOutlet weak var showDescriptionLabel: UILabel!
-    @IBOutlet private var ratingView: RatingView!
+    @IBOutlet weak var ratingView: RatingView!
     
     // MARK: - Properties
     
@@ -27,10 +33,12 @@ final class ShowInfoCell: UITableViewCell {
         ratingView.configure(withStyle: .small)
         ratingView.isEnabled = false
     }
-
-    func configure(with show: Show) {
-        showDescriptionLabel.text = show.title
-        ratingView.setRoundedRating(show.averageRating!)
+    
+    func setup(with item: ShowInfoItem) {
+        showDescriptionLabel.text = item.showDescription
+        showImage.image = item.image
+        ratingView.setRoundedRating(3.5)
+        show = item.show
     }
     
 }

@@ -35,6 +35,7 @@
 		42FDFD2E289156900003D681 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FDFD2D289156900003D681 /* RatingView.swift */; };
 		42FDFD3228915B870003D681 /* ShowInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FDFD3128915B870003D681 /* ShowInfoCell.xib */; };
 		42FDFD34289168490003D681 /* ShowReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FDFD33289168490003D681 /* ShowReviewCell.xib */; };
+		42FDFD36289184300003D681 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FDFD35289184300003D681 /* Alert.swift */; };
 		5ABB7F58218967C996E3984D /* Pods_TV_Shows_TV_ShowsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6F65FC5DD286E530F16656 /* Pods_TV_Shows_TV_ShowsUITests.framework */; };
 		9AD0E9A3C926589C853B74FE /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD696F12A01BA1431C9C17A /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +91,7 @@
 		42FDFD2D289156900003D681 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RatingView.swift; path = "../../../ios-materials-2022/lectures/06/home-assignment-05/RatingView.swift"; sourceTree = "<group>"; };
 		42FDFD3128915B870003D681 /* ShowInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowInfoCell.xib; sourceTree = "<group>"; };
 		42FDFD33289168490003D681 /* ShowReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowReviewCell.xib; sourceTree = "<group>"; };
+		42FDFD35289184300003D681 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		5D6ED43880881010541FCF33 /* Pods-TV ShowsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV ShowsTests.release.xcconfig"; path = "Target Support Files/Pods-TV ShowsTests/Pods-TV ShowsTests.release.xcconfig"; sourceTree = "<group>"; };
 		806E49F941A3EF583114A8E9 /* Pods_TV_ShowsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_ShowsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C36EB0463862B1095B2D23 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				424E53C8288D840600D444C9 /* Router.swift */,
 				424E53CA288D845900D444C9 /* Constants.swift */,
 				424E53D128900C4E00D444C9 /* SessionManager.swift */,
+				42FDFD35289184300003D681 /* Alert.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42FDFD36289184300003D681 /* Alert.swift in Sources */,
 				424E53C7288D835A00D444C9 /* Service.swift in Sources */,
 				42064AD3287C236F00E400FD /* LoginViewController.swift in Sources */,
 				42FDFD2C289156510003D681 /* ShowReviewCell.swift in Sources */,

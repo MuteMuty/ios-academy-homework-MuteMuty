@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 final class SessionManager {
     
@@ -15,7 +16,8 @@ final class SessionManager {
     
     private init() {}
     
-    func storeAuthInfo(headers: [String: String]?) {
+    func storeAuthInfo(dataResponse: DataResponse<UserResponse, AFError>?) {
+        let headers = dataResponse?.response?.headers.dictionary
         guard let headers = headers else { return }
         let authInfo = try? AuthInfo(headers: headers)
         self.authInfo = authInfo
