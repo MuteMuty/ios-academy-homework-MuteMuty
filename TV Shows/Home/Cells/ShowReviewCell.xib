@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DA1-C6-K9b">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="126"/>
+                        <rect key="frame" x="0.0" y="16" width="414" height="94"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-J7-pqe">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -65,7 +65,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ei-p0-CNM">
-                                <rect key="frame" x="0.0" y="70" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="70" width="414" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -74,9 +74,9 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="DA1-C6-K9b" secondAttribute="bottom" id="3Ab-me-zUH"/>
+                    <constraint firstAttribute="bottom" secondItem="DA1-C6-K9b" secondAttribute="bottom" constant="16" id="3Ab-me-zUH"/>
                     <constraint firstItem="DA1-C6-K9b" firstAttribute="leading" secondItem="PCZ-mn-smC" secondAttribute="leading" id="Ey7-fQ-1xt"/>
-                    <constraint firstItem="DA1-C6-K9b" firstAttribute="top" secondItem="PCZ-mn-smC" secondAttribute="top" id="qIy-8t-pyV"/>
+                    <constraint firstItem="DA1-C6-K9b" firstAttribute="top" secondItem="PCZ-mn-smC" secondAttribute="top" constant="16" id="qIy-8t-pyV"/>
                     <constraint firstAttribute="trailing" secondItem="DA1-C6-K9b" secondAttribute="trailing" id="uma-90-W9m"/>
                 </constraints>
             </tableViewCellContentView>

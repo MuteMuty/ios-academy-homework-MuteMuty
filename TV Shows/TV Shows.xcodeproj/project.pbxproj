@@ -36,6 +36,8 @@
 		42FDFD3228915B870003D681 /* ShowInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FDFD3128915B870003D681 /* ShowInfoCell.xib */; };
 		42FDFD34289168490003D681 /* ShowReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FDFD33289168490003D681 /* ShowReviewCell.xib */; };
 		42FDFD36289184300003D681 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FDFD35289184300003D681 /* Alert.swift */; };
+		42FDFD382891C1100003D681 /* WriteReview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42FDFD372891C1100003D681 /* WriteReview.storyboard */; };
+		42FDFD3A2891C13C0003D681 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FDFD392891C13C0003D681 /* WriteReviewViewController.swift */; };
 		5ABB7F58218967C996E3984D /* Pods_TV_Shows_TV_ShowsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6F65FC5DD286E530F16656 /* Pods_TV_Shows_TV_ShowsUITests.framework */; };
 		9AD0E9A3C926589C853B74FE /* Pods_TV_Shows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAD696F12A01BA1431C9C17A /* Pods_TV_Shows.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +94,8 @@
 		42FDFD3128915B870003D681 /* ShowInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowInfoCell.xib; sourceTree = "<group>"; };
 		42FDFD33289168490003D681 /* ShowReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowReviewCell.xib; sourceTree = "<group>"; };
 		42FDFD35289184300003D681 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		42FDFD372891C1100003D681 /* WriteReview.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteReview.storyboard; sourceTree = "<group>"; };
+		42FDFD392891C13C0003D681 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
 		5D6ED43880881010541FCF33 /* Pods-TV ShowsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV ShowsTests.release.xcconfig"; path = "Target Support Files/Pods-TV ShowsTests/Pods-TV ShowsTests.release.xcconfig"; sourceTree = "<group>"; };
 		806E49F941A3EF583114A8E9 /* Pods_TV_ShowsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_ShowsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C36EB0463862B1095B2D23 /* Pods-TV Shows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TV Shows.release.xcconfig"; path = "Target Support Files/Pods-TV Shows/Pods-TV Shows.release.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 				424E53C028882C8100D444C9 /* HomeViewController.swift */,
 				42FDFD2528912E640003D681 /* ShowDetails.storyboard */,
 				42FDFD2328912D4A0003D681 /* ShowDetailsViewController.swift */,
+				42FDFD372891C1100003D681 /* WriteReview.storyboard */,
+				42FDFD392891C13C0003D681 /* WriteReviewViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 			files = (
 				42FDFD3228915B870003D681 /* ShowInfoCell.xib in Resources */,
 				42FDFD34289168490003D681 /* ShowReviewCell.xib in Resources */,
+				42FDFD382891C1100003D681 /* WriteReview.storyboard in Resources */,
 				42064AAC287833D500E400FD /* LaunchScreen.storyboard in Resources */,
 				42064AA9287833D500E400FD /* Assets.xcassets in Resources */,
 				42064AD1287C234000E400FD /* Login.storyboard in Resources */,
@@ -499,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42FDFD3A2891C13C0003D681 /* WriteReviewViewController.swift in Sources */,
 				42FDFD36289184300003D681 /* Alert.swift in Sources */,
 				424E53C7288D835A00D444C9 /* Service.swift in Sources */,
 				42064AD3287C236F00E400FD /* LoginViewController.swift in Sources */,

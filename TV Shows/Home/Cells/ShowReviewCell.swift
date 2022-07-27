@@ -8,9 +8,7 @@
 import UIKit
 
 struct ShowReviewItem {
-    let profileImage: UIImage?
-    let email: String
-    let review: String?
+    let review: Review
 }
 
 final class ShowReviewCell: UITableViewCell {
@@ -34,18 +32,11 @@ final class ShowReviewCell: UITableViewCell {
         ratingView.configure(withStyle: .small)
         ratingView.isEnabled = false
     }
-
-    func configure(with show: Show) {
-        profileImage.image = UIImage(named: "ic-profile.pdf")
-        emailLabel.text = "neki@neki.neki"
-        ratingView.setRoundedRating(4.0)
-        reviewLable.text = "sfsd  sdfds sdf f dsaas sa ds dsg dvs dsf fds  dsf dsfsfa a sf saa dsasd a ds sadsa d"
-    }
     
     func setup(with item: ShowReviewItem) {
-        profileImage.image = item.profileImage
-        emailLabel.text = item.email
-        ratingView.setRoundedRating(4.0)
-        reviewLable.text = item.review
+        //profileImage.image = item.profileImage
+        emailLabel.text = item.review.user.email
+        ratingView.setRoundedRating(Double(item.review.rating))
+        reviewLable.text = item.review.comment
     }
 }

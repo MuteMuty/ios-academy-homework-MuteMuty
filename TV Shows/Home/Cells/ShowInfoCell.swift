@@ -8,8 +8,6 @@
 import UIKit
 
 struct ShowInfoItem {
-    let image: UIImage?
-    let showDescription: String
     let show: Show
 }
 
@@ -19,11 +17,8 @@ final class ShowInfoCell: UITableViewCell {
     
     @IBOutlet weak var showImage: UIImageView!
     @IBOutlet weak var showDescriptionLabel: UILabel!
+    @IBOutlet weak var noReviewsLabel: UILabel!
     @IBOutlet weak var ratingView: RatingView!
-    
-    // MARK: - Properties
-    
-    var show: Show?
     
     // MARK: - Functions
     
@@ -35,10 +30,13 @@ final class ShowInfoCell: UITableViewCell {
     }
     
     func setup(with item: ShowInfoItem) {
-        showDescriptionLabel.text = item.showDescription
-        showImage.image = item.image
-        ratingView.setRoundedRating(3.5)
-        show = item.show
+        showDescriptionLabel.text = item.show.description
+        //showImage.image = item.image
+        if item.show.noOfReviews > 0 {
+            noReviewsLabel.text = "\(item.show.noOfReviews) REVIEWS, \(item.show.averageRating!) AVERAGE"
+            noReviewsLabel.textAlignment = .left
+        }
+        ratingView.setRoundedRating(item.show.averageRating!)
     }
     
 }

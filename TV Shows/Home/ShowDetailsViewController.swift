@@ -44,12 +44,12 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func writeReviewButtonClicked() {
-        let storyboard = UIStoryboard(name: "Home", bundle: .main)
-        let writeAReviewViewController = storyboard.instantiateViewController(
-            withIdentifier: "HomeViewController")
-            as! HomeViewController
+        let storyboard = UIStoryboard(name: "WriteReview", bundle: .main)
+        let writeReviewViewController = storyboard.instantiateViewController(
+            withIdentifier: "WriteReviewViewController")
+            as! WriteReviewViewController
         
-        let navigationController = UINavigationController(rootViewController: writeAReviewViewController)
+        let navigationController = UINavigationController(rootViewController: writeReviewViewController)
         self.present(navigationController, animated: true)
     }
     
@@ -90,7 +90,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
                 withIdentifier: String(describing: ShowInfoCell.self), for: indexPath
             ) as! ShowInfoCell
             
-            infoCell.setup(with: ShowInfoItem(image: UIImage(named: "ic-profile.pdf"), showDescription: (show?.description)!, show: show!))
+            infoCell.setup(with: ShowInfoItem(show: show!))
             
             return infoCell
         } else {
@@ -99,7 +99,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
             ) as! ShowReviewCell
             
             let review = reviews[indexPath.row - 1]
-            reviewCell.setup(with: ShowReviewItem(profileImage: UIImage(named: "ic-profile.pdf"), email: review.user.email, review: review.comment))
+            reviewCell.setup(with: ShowReviewItem(review: review))
             
             if currentPage < allPages && indexPath.row == reviews.count - 1 {
                 currentPage += 1

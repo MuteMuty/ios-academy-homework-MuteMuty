@@ -18,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="h3C-dh-PAo">
-                                <rect key="frame" x="20" y="140" width="374" height="722"/>
+                                <rect key="frame" x="20" y="20" width="374" height="842"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JnS-fD-1VC">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="654"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="774"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdu-oQ-ySo">
-                                        <rect key="frame" x="0.0" y="674" width="374" height="48"/>
+                                        <rect key="frame" x="0.0" y="794" width="374" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="7TT-v8-Khp"/>
                                         </constraints>
@@ -58,7 +58,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="h3C-dh-PAo" secondAttribute="trailing" constant="20" id="1CO-xs-UtY"/>
                             <constraint firstItem="h3C-dh-PAo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="HL7-cq-2Ym"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="h3C-dh-PAo" secondAttribute="bottom" id="dXE-jW-SR2"/>
-                            <constraint firstItem="h3C-dh-PAo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="whM-og-vxF"/>
+                            <constraint firstItem="h3C-dh-PAo" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="20" symbolic="YES" id="whM-og-vxF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="ShowDetails" id="njg-Me-fRQ"/>
