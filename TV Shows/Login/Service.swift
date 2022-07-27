@@ -40,4 +40,14 @@ final class Service {
             }
     }
     
+    func getShowId(page: Int, id: String, completion: @escaping (DataResponse<ReviewsResponse, AFError>) -> Void) {
+        
+        AF
+            .request(Router.showId(page: page, id: id))
+            .validate()
+            .responseDecodable(of: ReviewsResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
 }
