@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="yNQ-Pf-jJc">
-                                                <rect key="frame" x="20" y="30" width="374" height="411"/>
+                                                <rect key="frame" x="20" y="30" width="374" height="419"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3kf-n0-Auc">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="80.5"/>
@@ -65,15 +65,23 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1C-r3-jel">
-                                                        <rect key="frame" x="0.0" y="371" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="371" width="374" height="48"/>
                                                         <color key="backgroundColor" red="0.32156862749999998" green="0.21176470589999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="Vi2-Tm-7gl"/>
+                                                            <constraint firstAttribute="height" constant="48" id="Vi2-Tm-7gl"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                         <state key="normal" title="Submit">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="24"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="submitButtonClicked" destination="Y6W-OH-hqX" eventType="touchUpInside" id="iXG-gH-Y2Y"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -108,8 +116,16 @@
                     <navigationItem key="navigationItem" title="Write a Review" id="4c0-zn-bz7">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="Yu3-hW-ZR7">
                             <color key="tintColor" red="0.32156862749999998" green="0.21176470589999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="closeClicked" destination="Y6W-OH-hqX" id="JVd-w1-p71"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="commentTextField" destination="aLU-UP-feQ" id="pPn-q6-FUi"/>
+                        <outlet property="ratingView" destination="hWk-P8-rim" id="0IX-cZ-Fmh"/>
+                        <outlet property="submitButton" destination="Q1C-r3-jel" id="Ltu-Mg-ufl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

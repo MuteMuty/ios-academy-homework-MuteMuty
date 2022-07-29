@@ -30,15 +30,7 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
-        MBProgressHUD.showAdded(to: view, animated: true)
-        
-        tableView.dataSource = self
-        showTitle.title = show?.title
-        getShowId(page: currentPage, id: show!.id)
-        
-        
-        tableView.register(UINib(nibName: "ShowInfoCell", bundle: nil), forCellReuseIdentifier: String(describing: ShowInfoCell.self))
-        tableView.register(UINib(nibName: "ShowReviewCell", bundle: nil), forCellReuseIdentifier: String(describing: ShowReviewCell.self))
+        setupTable()
     }
     
     // MARK: - Actions
@@ -49,11 +41,28 @@ class ShowDetailsViewController: UIViewController {
             withIdentifier: "WriteReviewViewController")
             as! WriteReviewViewController
         
+        writeReviewViewController.show = show!
+        writeReviewViewController.delegate = self
+        
         let navigationController = UINavigationController(rootViewController: writeReviewViewController)
-        self.present(navigationController, animated: true)
+        present(navigationController, animated: true)
     }
     
     // MARK: - Utility methods
+    
+    private func setupTable() {
+        MBProgressHUD.showAdded(to: view, animated: true)
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1)
+        
+        tableView.dataSource = self
+        showTitle.title = show?.title
+        
+        displayShow(id: show!.id)
+        getShowId(page: currentPage, id: show!.id)
+        
+        tableView.register(UINib(nibName: "ShowInfoCell", bundle: nil), forCellReuseIdentifier: String(describing: ShowInfoCell.self))
+        tableView.register(UINib(nibName: "ShowReviewCell", bundle: nil), forCellReuseIdentifier: String(describing: ShowReviewCell.self))
+    }
     
     private func getShowId(page: Int, id: String) {
         service.getShowId(page: page, id: id) {  [weak self] dataResponse in
@@ -66,10 +75,23 @@ class ShowDetailsViewController: UIViewController {
                 self.currentPage = reviewResponse.meta.pagination.page
                 self.reviews.append(contentsOf: reviewResponse.reviews)
                 self.tableView.reloadData()
-                print(self.reviews.count)
-                print("success!")
-            case .failure:
-                print("failure")
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    private func displayShow(id: String) {
+        service.displayShow(id: id) { [weak self] dataResponse in
+            guard let self = self else { return }
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            switch dataResponse.result {
+            case .success(let reviewResponse):
+                self.show = reviewResponse.show
+                self.tableView.reloadData()
+            case .failure(let error):
+                print("Error: \(error)")
             }
         }
     }
@@ -85,6 +107,32 @@ extension ShowDetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        switch sections[indexPath.section] {
+//            case .infoCell:
+//                let infoCell = tableView.dequeueReusableCell(
+//                    withIdentifier: String(describing: ShowInfoCell.self),
+//                    for: indexPath
+//                ) as! ShowInfoCell
+//
+//                infoCell.setup(with: ShowInfoItem(show: show!))
+//
+//                return infoCell
+//            case .reviewCell:
+//                let reviewCell = tableView.dequeueReusableCell(
+//                    withIdentifier: String(describing: ShowReviewCell.self),
+//                    for: indexPath
+//                ) as! ShowReviewCell
+//
+//                let review = reviews[indexPath.section]
+//                reviewCell.setup(with: ShowReviewItem(review: review))
+//
+//                if currentPage < allPages && indexPath.section == reviews.count {
+//                    currentPage += 1
+//                    getShowId(page: currentPage, id: show!.id)
+//                }
+//
+//                return reviewCell
+//        }
         if indexPath.row == 0 {
             let infoCell = tableView.dequeueReusableCell(
                 withIdentifier: String(describing: ShowInfoCell.self), for: indexPath
@@ -107,5 +155,24 @@ extension ShowDetailsViewController: UITableViewDataSource {
             }
             return reviewCell
         }
+    }
+}
+
+enum Section {
+    case infoCell
+    case reviewCell
+}
+
+private var sections: [Section] = [
+    .infoCell,
+    .reviewCell
+]
+
+extension ShowDetailsViewController: ReloadData {
+    func reloadData() {
+        reviews = []
+        currentPage = 1
+        displayShow(id: show!.id)
+        getShowId(page: currentPage, id: show!.id)
     }
 }

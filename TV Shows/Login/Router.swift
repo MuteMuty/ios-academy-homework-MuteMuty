@@ -13,7 +13,9 @@ enum Router : URLRequestConvertible {
     case login(email: String, password: String)
     case register(email: String, password: String)
     case shows(page: Int)
+    case displayShow(id: String)
     case showId(page: Int, id: String)
+    case postReview(showId: String, rating: String, comment: String)
     
     var path : String {
         switch self {
@@ -23,16 +25,20 @@ enum Router : URLRequestConvertible {
             return "/users"
         case .shows:
             return "/shows"
+        case .displayShow(let id):
+            return "/shows/\(id)"
         case .showId(_, let id):
             return "/shows/\(id)/reviews"
+        case .postReview(_, _, _):
+            return "/reviews"
         }
     }
     
     var method : HTTPMethod {
         switch self {
-        case .login, .register:
+        case .login, .register, .postReview:
             return .post
-        case .shows, .showId:
+        case .shows, .displayShow, .showId:
             return .get
         }
     }
@@ -55,10 +61,18 @@ enum Router : URLRequestConvertible {
                 "page": "\(page)",
                 "items": "20"
             ]
+        case .displayShow(_):
+            return [:]
         case .showId(let page, _):
             return [
                 "page": "\(page)",
                 "items": "20"
+            ]
+        case .postReview(let showId, let rating, let comment):
+            return [
+                "rating": rating,
+                "comment": comment,
+                "show_id": showId
             ]
         }
     }
@@ -72,9 +86,9 @@ enum Router : URLRequestConvertible {
         )
         
         switch self {
-        case .login, .register:
+        case .login, .register, .postReview:
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        case .shows, .showId:
+        case .shows, .displayShow, .showId:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         }
         

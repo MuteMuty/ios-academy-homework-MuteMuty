@@ -12,6 +12,10 @@ struct ShowsResponse: Decodable {
     let meta: Meta
 }
 
+struct ShowResponse: Decodable {
+    let show: Show
+}
+
 struct Show: Decodable {
     let id: String
     let averageRating: Double?

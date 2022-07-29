@@ -108,6 +108,11 @@ final class LoginViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
+        #if DEBUG
+        emailTextField.text = "ee@ee.ee"
+        passwordTextField.text = "eeeeeeee"
+        loginButton.isEnabled = true
+        #endif
     }
     
     private func enableButtons() {
