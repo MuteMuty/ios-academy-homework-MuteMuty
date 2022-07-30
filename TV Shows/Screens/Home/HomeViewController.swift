@@ -17,7 +17,6 @@ final class HomeViewController: UIViewController {
     // MARK: - Public Properties
     
     var user: User?
-    var authInfo: AuthInfo?
     
     // MARK: - Private Properties
     
@@ -25,6 +24,7 @@ final class HomeViewController: UIViewController {
     private var service: Service = Service()
     private var allPages: Int = 1
     private var currentPage: Int = 1
+    private var notificationToken: NSObjectProtocol?
     
     // MARK: - Lifecycle methods
     
@@ -37,13 +37,21 @@ final class HomeViewController: UIViewController {
     private func setUpView() {
         MBProgressHUD.showAdded(to: view, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let profileDetailsItem = UIBarButtonItem(
+          image: UIImage(named: "ic-profile"),
+          style: .plain,
+          target: self,
+          action: #selector(profileDetailsActionHandler)
+        )
+        profileDetailsItem.tintColor = #colorLiteral(red: 0.3215686275, green: 0.2117647059, blue: 0.5490196078, alpha: 1)
+        navigationItem.rightBarButtonItem = profileDetailsItem
+        
         tableView.dataSource = self
         tableView.delegate = self
         getUser()
         getShows(page: currentPage)
-        
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        notification()
     }
     
     private func getShows(page: Int) {
@@ -64,7 +72,7 @@ final class HomeViewController: UIViewController {
         }
     }
     
-    private func getUser() {
+    func getUser() {
         service.getUser {  [weak self] dataResponse in
             guard let self = self else { return }
             
@@ -77,14 +85,32 @@ final class HomeViewController: UIViewController {
         }
     }
     
-    @objc private func pullToRefresh() {
-        shows = []
-        currentPage = 1
-        getShows(page: currentPage)
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.tableView.refreshControl?.endRefreshing()
-        }
+    private func notification() {
+        notificationToken = NotificationCenter
+            .default
+            .addObserver(
+                forName: Notification.Name(rawValue: "logout"),
+                object: nil,
+                queue: nil
+            ) {
+                [weak self] notification in
+                guard let self = self else { return }
+                let storyboard = UIStoryboard(name: "Login", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(
+                    withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.setViewControllers([loginViewController], animated: true)
+            }
+    }
+    
+    @objc private func profileDetailsActionHandler() {
+        let storyboard = UIStoryboard(name: "ProfileDetails", bundle: .main)
+        let profileDetailsViewController = storyboard.instantiateViewController(
+            withIdentifier: "ProfileDetailsViewController")
+            as! ProfileDetailsViewController
+        
+        profileDetailsViewController.user = user
+        let navigationController = UINavigationController(rootViewController: profileDetailsViewController)
+        present(navigationController, animated: true)
     }
 }
 
@@ -126,7 +152,6 @@ extension HomeViewController: UITableViewDelegate {
         let showDetailsViewController = storyboard.instantiateViewController(
             withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
         showDetailsViewController.show = show
-        showDetailsViewController.user = user
         navigationController?.pushViewController(showDetailsViewController, animated: true)
         
         print(show)

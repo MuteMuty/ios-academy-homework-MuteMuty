@@ -18,7 +18,6 @@ class ShowDetailsViewController: UIViewController {
     // MARK: - Public Properties
     
     var show: Show?
-    var user: User?
     var reviews: [Review] = []
     
     // MARK: - Private Properties

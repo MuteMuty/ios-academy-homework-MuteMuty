@@ -61,13 +61,12 @@ final class LoginViewController: UIViewController {
             MBProgressHUD.hide(for: self.view, animated: true)
             
             switch dataResponse.result {
-            case .success(let userResponse):
+            case .success:
                 if self.isRememberMeClicked {
                     if let authInfo = SessionManager.shared.authInfo {
                         KeychainManager.addAuthInfo(authInfo: authInfo)
                     }
                 }
-                homeViewController.user = userResponse.user
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:
                 self.animateEmailAndPasswordFields()
@@ -91,13 +90,12 @@ final class LoginViewController: UIViewController {
             MBProgressHUD.hide(for: self.view, animated: true)
             
             switch dataResponse.result {
-            case .success(let userResponse):
+            case .success:
                 if self.isRememberMeClicked {
                     if let authInfo = SessionManager.shared.authInfo {
                         KeychainManager.addAuthInfo(authInfo: authInfo)
                     }
                 }
-                homeViewController.user = userResponse.user
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:
                 self.showAlter(message: "Email is not an email.")
