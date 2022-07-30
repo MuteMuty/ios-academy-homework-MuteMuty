@@ -12,8 +12,8 @@ class ShowDetailsViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var showTitle: UINavigationItem!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var showTitle: UINavigationItem!
+    @IBOutlet private weak var tableView: UITableView!
     
     // MARK: - Public Properties
     
