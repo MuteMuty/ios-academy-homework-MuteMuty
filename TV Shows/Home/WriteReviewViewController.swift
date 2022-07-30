@@ -39,7 +39,10 @@ final class WriteReviewViewController: UIViewController {
     
     @IBAction func submitButtonClicked() {
         if !isOkToPost() {
-            showAlter(message: "Select rating stars to post.")
+            animateStars()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.showAlter(message: "Select rating stars to post.")
+            }
             return
         }
         MBProgressHUD.showAdded(to: view, animated: true)
@@ -76,6 +79,22 @@ final class WriteReviewViewController: UIViewController {
     
     private func isOkToPost() -> Bool {
         return ratingView.rating > 0
+    }
+    
+    private func animateStars() {
+        let newTransform = CGAffineTransform(translationX: 30.0, y: 0)
+        
+        UIView.animate(
+            withDuration: 0.3,
+            delay: 0,
+            usingSpringWithDamping: 0.3,
+            initialSpringVelocity: 0.8,
+            options: [.curveEaseInOut, .autoreverse]
+        ) {
+            self.ratingView.transform = newTransform
+        } completion: { _ in
+            self.ratingView.transform = .identity
+        }
     }
     
 }

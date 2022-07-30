@@ -22,5 +22,10 @@ final class SessionManager {
         let authInfo = try? AuthInfo(headers: headers)
         self.authInfo = authInfo
     }
+    
+    func storeAuthInfoFromKeychain() {
+        let authInfo: AuthInfo = KeychainManager.getAuthInfo()!
+        self.authInfo = authInfo
+    }
 
 }
