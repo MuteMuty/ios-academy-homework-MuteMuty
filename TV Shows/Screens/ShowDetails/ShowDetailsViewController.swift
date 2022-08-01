@@ -111,58 +111,40 @@ class ShowDetailsViewController: UIViewController {
 
 extension ShowDetailsViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reviews.count + 1
+        return section == 0 ? 1 : reviews.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        switch sections[indexPath.section] {
-//            case .infoCell:
-//                let infoCell = tableView.dequeueReusableCell(
-//                    withIdentifier: String(describing: ShowInfoCell.self),
-//                    for: indexPath
-//                ) as! ShowInfoCell
-//
-//                infoCell.setup(with: ShowInfoItem(show: show!))
-//
-//                return infoCell
-//            case .reviewCell:
-//                let reviewCell = tableView.dequeueReusableCell(
-//                    withIdentifier: String(describing: ShowReviewCell.self),
-//                    for: indexPath
-//                ) as! ShowReviewCell
-//
-//                let review = reviews[indexPath.section]
-//                reviewCell.setup(with: ShowReviewItem(review: review))
-//
-//                if currentPage < allPages && indexPath.section == reviews.count {
-//                    currentPage += 1
-//                    getShowId(page: currentPage, id: show!.id)
-//                }
-//
-//                return reviewCell
-//        }
-        if indexPath.row == 0 {
-            let infoCell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: ShowInfoCell.self), for: indexPath
-            ) as! ShowInfoCell
-            
-            infoCell.setup(with: ShowInfoItem(show: show!))
-            
-            return infoCell
-        } else {
-            let reviewCell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: ShowReviewCell.self), for: indexPath
-            ) as! ShowReviewCell
-            
-            let review = reviews[indexPath.row - 1]
-            reviewCell.setup(with: ShowReviewItem(review: review))
-            
-            if currentPage < allPages && indexPath.row == reviews.count - 1 {
-                currentPage += 1
-                getShowId(page: currentPage, id: show!.id)
-            }
-            return reviewCell
+        switch sections[indexPath.section] {
+            case .infoCell:
+                let infoCell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShowInfoCell.self),
+                    for: indexPath
+                ) as! ShowInfoCell
+
+                infoCell.setup(with: ShowInfoItem(show: show!))
+
+                return infoCell
+            case .reviewCell:
+                let reviewCell = tableView.dequeueReusableCell(
+                    withIdentifier: String(describing: ShowReviewCell.self),
+                    for: indexPath
+                ) as! ShowReviewCell
+
+                let review = reviews[indexPath.row]
+                reviewCell.setup(with: ShowReviewItem(review: review))
+
+                if currentPage < allPages && indexPath.row + 1 == reviews.count {
+                    currentPage += 1
+                    getShowId(page: currentPage, id: show!.id)
+                }
+
+                return reviewCell
         }
     }
 }

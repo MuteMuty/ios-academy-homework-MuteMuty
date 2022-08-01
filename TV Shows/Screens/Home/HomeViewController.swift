@@ -65,7 +65,6 @@ final class HomeViewController: UIViewController {
                 self.currentPage = showResponse.meta.pagination.page
                 self.shows.append(contentsOf: showResponse.shows)
                 self.tableView.reloadData()
-                print("success!")
             case .failure:
                 print("failure")
             }
@@ -153,7 +152,5 @@ extension HomeViewController: UITableViewDelegate {
             withIdentifier: "ShowDetailsViewController") as! ShowDetailsViewController
         showDetailsViewController.show = show
         navigationController?.pushViewController(showDetailsViewController, animated: true)
-        
-        print(show)
     }
 }
