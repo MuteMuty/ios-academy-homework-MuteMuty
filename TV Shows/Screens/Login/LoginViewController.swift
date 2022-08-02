@@ -63,10 +63,8 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success:
-                if self.isRememberMeClicked {
-                    if let authInfo = SessionManager.shared.authInfo {
-                        KeychainManager.addAuthInfo(authInfo: authInfo)
-                    }
+                if self.isRememberMeClicked, let authInfo = SessionManager.shared.authInfo {
+                    KeychainManager.addAuthInfo(authInfo: authInfo)
                 }
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:
@@ -92,10 +90,8 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success:
-                if self.isRememberMeClicked {
-                    if let authInfo = SessionManager.shared.authInfo {
-                        KeychainManager.addAuthInfo(authInfo: authInfo)
-                    }
+                if self.isRememberMeClicked, let authInfo = SessionManager.shared.authInfo {
+                    KeychainManager.addAuthInfo(authInfo: authInfo)
                 }
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:

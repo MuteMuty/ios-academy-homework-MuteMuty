@@ -90,10 +90,10 @@ enum Router : URLRequestConvertible {
             headers: HTTPHeaders(headers)
         )
         
-        switch self {
-        case .login, .register, .postReview:
+        switch method {
+        case .post, .put, .patch:
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        case .getUser, .shows, .displayShow, .showId:
+        default:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         }
         

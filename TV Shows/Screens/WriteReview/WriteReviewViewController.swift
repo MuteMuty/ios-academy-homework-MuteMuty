@@ -39,7 +39,7 @@ final class WriteReviewViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func submitButtonClicked() {
-        if !isOkToPost() {
+        guard isOkToPost() else {
             animateStars()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.showAlter(message: "Select rating stars to post.")
@@ -47,7 +47,9 @@ final class WriteReviewViewController: UIViewController {
             return
         }
         MBProgressHUD.showAdded(to: view, animated: true)
-        service.postReview(showId: show!.id, rating: String(ratingView.rating), comment: commentTextField.text!) {  [weak self] dataResponse in
+        guard let show = show, let comment = commentTextField.text else { return }
+        
+        service.postReview(showId: show.id, rating: String(ratingView.rating), comment: comment) {  [weak self] dataResponse in
             guard let self = self else { return }
             MBProgressHUD.hide(for: self.view, animated: true)
             

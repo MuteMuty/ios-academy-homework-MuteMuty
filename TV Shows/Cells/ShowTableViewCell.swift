@@ -13,9 +13,13 @@ struct ShowItem {
 }
 
 final class ShowTableViewCell: UITableViewCell {
+    
+    // MARK: - Outlets
 
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    
+    // MARK: - Functions
     
     func setup(with item: ShowItem) {
         titleLabel.text = item.show.title

@@ -15,39 +15,25 @@ class KeychainManager {
     private init() {}
     
     static func addAuthInfo(authInfo: AuthInfo) {
-        shared["accessToken"] = authInfo.accessToken
-        shared["client"] = authInfo.client
-        shared["tokenType"] = authInfo.tokenType
-        shared["expiry"] = authInfo.expiry
-        shared["uid"] = authInfo.uid
-    }
-        
-    static func getAuthInfo() -> AuthInfo? {
-        if
-            let accessToken = shared["accessToken"],
-            let client = shared["client"],
-            let tokenType = shared["tokenType"],
-            let expiry = shared["expiry"],
-            let uid = shared["uid"]
-            {
-            let authInfo = AuthInfo(
-                accessToken: accessToken,
-                client: client,
-                tokenType: tokenType,
-                expiry: expiry,
-                uid: uid)
-            return authInfo
-        } else {
-            return nil
+        let encoder = PropertyListEncoder()
+        if let encoded = try? encoder.encode(authInfo) {
+            try? shared.set(encoded, key: "authInfo")
         }
     }
         
+    static func getAuthInfo() -> AuthInfo? {
+        let decoder = PropertyListDecoder()
+        if
+            let data = try? shared.getData("authInfo"),
+            let decodedAuthInfo = try? decoder.decode(AuthInfo.self, from: data)
+        {
+            return decodedAuthInfo
+        }
+        return nil
+    }
+        
     static func removeUserInfo() {
-        shared["accessToken"] = nil
-        shared["client"] = nil
-        shared["tokenType"] = nil
-        shared["expiry"] = nil
-        shared["uid"] = nil
+        try? shared.remove("authInfo")
     }
     
 }
