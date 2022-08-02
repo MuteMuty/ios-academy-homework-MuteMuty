@@ -30,4 +30,44 @@ final class Service {
             }
     }
     
+    func getShows(page: Int, completion: @escaping (DataResponse<ShowsResponse, AFError>) -> Void) {
+        
+        AF
+            .request(Router.shows(page: page))
+            .validate()
+            .responseDecodable(of: ShowsResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
+    func displayShow(id: String, completion: @escaping (DataResponse<ShowResponse, AFError>) -> Void) {
+        
+        AF
+            .request(Router.displayShow(id: id))
+            .validate()
+            .responseDecodable(of: ShowResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
+    func getShowId(page: Int, id: String, completion: @escaping (DataResponse<ReviewsResponse, AFError>) -> Void) {
+        
+        AF
+            .request(Router.showId(page: page, id: id))
+            .validate()
+            .responseDecodable(of: ReviewsResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
+    func postReview(showId: String, rating: String, comment: String, completion: @escaping (DataResponse<ReviewResponse, AFError>) -> Void) {
+        
+        AF
+            .request(Router.postReview(showId: showId, rating: rating, comment: comment))
+            .validate()
+            .responseDecodable(of: ReviewResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
 }

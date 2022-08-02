@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ShowReviewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ShowReviewCell" rowHeight="126" id="8Nw-b6-6PY" customClass="ShowReviewCell" customModule="TV_Shows" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="126"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Nw-b6-6PY" id="PCZ-mn-smC">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="126"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DA1-C6-K9b">
+                        <rect key="frame" x="0.0" y="16" width="414" height="94"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RGH-J7-pqe">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-profile-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Jjp-YQ-yPl">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="KUB-oN-biv"/>
+                                            <constraint firstAttribute="width" constant="50" id="jAa-gd-Zr6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xso-Xp-dHI">
+                                        <rect key="frame" x="50" y="0.0" width="20" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="YdY-uY-reb"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="EaF-Kl-PK0">
+                                        <rect key="frame" x="70" y="0.0" width="344" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXW-JF-a5n">
+                                                <rect key="frame" x="0.0" y="0.0" width="344" height="10"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xq-lY-qgR" customClass="RatingView" customModule="TV_Shows" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="10" width="344" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Y5x-ld-riy"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGT-Ee-hnC">
+                                <rect key="frame" x="0.0" y="50" width="414" height="20"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="2ad-gn-sEW"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ei-p0-CNM">
+                                <rect key="frame" x="0.0" y="70" width="414" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="DA1-C6-K9b" secondAttribute="bottom" constant="16" id="3Ab-me-zUH"/>
+                    <constraint firstItem="DA1-C6-K9b" firstAttribute="leading" secondItem="PCZ-mn-smC" secondAttribute="leading" id="Ey7-fQ-1xt"/>
+                    <constraint firstItem="DA1-C6-K9b" firstAttribute="top" secondItem="PCZ-mn-smC" secondAttribute="top" constant="16" id="qIy-8t-pyV"/>
+                    <constraint firstAttribute="trailing" secondItem="DA1-C6-K9b" secondAttribute="trailing" id="uma-90-W9m"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="emailLabel" destination="FXW-JF-a5n" id="swy-Ov-maC"/>
+                <outlet property="profileImage" destination="Jjp-YQ-yPl" id="fUP-QD-o0P"/>
+                <outlet property="ratingView" destination="9xq-lY-qgR" id="IjE-hE-u8R"/>
+                <outlet property="reviewLable" destination="1ei-p0-CNM" id="ghF-x3-Dza"/>
+            </connections>
+            <point key="canvasLocation" x="159" y="48"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic-profile-placeholder" width="150" height="150"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

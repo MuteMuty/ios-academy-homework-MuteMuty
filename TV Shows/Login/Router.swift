@@ -12,6 +12,10 @@ enum Router : URLRequestConvertible {
     
     case login(email: String, password: String)
     case register(email: String, password: String)
+    case shows(page: Int)
+    case displayShow(id: String)
+    case showId(page: Int, id: String)
+    case postReview(showId: String, rating: String, comment: String)
     
     var path : String {
         switch self {
@@ -19,33 +23,74 @@ enum Router : URLRequestConvertible {
             return "/users/sign_in"
         case .register:
             return "/users"
+        case .shows:
+            return "/shows"
+        case .displayShow(let id):
+            return "/shows/\(id)"
+        case .showId(_, let id):
+            return "/shows/\(id)/reviews"
+        case .postReview(_, _, _):
+            return "/reviews"
         }
     }
     
     var method : HTTPMethod {
-        return .post
+        switch self {
+        case .login, .register, .postReview:
+            return .post
+        case .shows, .displayShow, .showId:
+            return .get
+        }
     }
     
     var parameters : [String: String] {
         switch self {
         case .login(let email, let password):
             return [
-                "email" : email,
-                "password" : password
+                "email": email,
+                "password": password
             ]
         case .register(let email, let password):
             return [
-                "email" : email,
-                "password" : password,
-                "password_confirmation" : password
+                "email": email,
+                "password": password,
+                "password_confirmation": password
+            ]
+        case .shows(let page):
+            return [
+                "page": "\(page)",
+                "items": "20"
+            ]
+        case .displayShow(_):
+            return [:]
+        case .showId(let page, _):
+            return [
+                "page": "\(page)",
+                "items": "20"
+            ]
+        case .postReview(let showId, let rating, let comment):
+            return [
+                "rating": rating,
+                "comment": comment,
+                "show_id": showId
             ]
         }
     }
         
     func asURLRequest() throws -> URLRequest {
-        var urlRequest = try URLRequest(url: Constants.API.baseURL + path, method: method , headers: HTTPHeaders([:]))
+        let headers = SessionManager.shared.authInfo?.headers ?? [:]
+        var urlRequest = try URLRequest(
+            url: Constants.API.baseURL + path,
+            method: method,
+            headers: HTTPHeaders(headers)
+        )
         
-        urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        switch self {
+        case .login, .register, .postReview:
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .shows, .displayShow, .showId:
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        }
         
         return urlRequest
     }
