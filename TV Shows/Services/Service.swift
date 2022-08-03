@@ -82,4 +82,30 @@ final class Service {
             }
     }
     
+    func storeImage(_ image: UIImage, completion: @escaping (DataResponse<UserResponse, AFError>) -> Void) {
+        guard
+            let imageData = image.jpegData(compressionQuality: 0.9)
+        else { return }
+
+        let requestData = MultipartFormData()
+        requestData.append(
+            imageData,
+            withName: "image",
+            fileName: "image.jpg",
+            mimeType: "image/jpg"
+        )
+
+        AF
+            .upload(
+                multipartFormData: requestData,
+                to: "\(Constants.API.baseURL)/users",
+                method: .put,
+                headers: HTTPHeaders(SessionManager.shared.authInfo?.headers ?? [:])
+            )
+            .validate()
+            .responseDecodable(of: UserResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
 }

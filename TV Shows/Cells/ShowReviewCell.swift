@@ -21,10 +21,6 @@ final class ShowReviewCell: UITableViewCell {
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var reviewLable: UILabel!
     
-    // MARK: - Properties
-    
-    var show: Show?
-    
     // MARK: - Functions
     
     override func awakeFromNib() {

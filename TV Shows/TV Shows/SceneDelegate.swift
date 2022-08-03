@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Check if user picked remember me
         if authInfo != nil {
             SessionManager.shared.storeAuthInfoFromKeychain()
-            //KeychainManager.removeUserInfo()
             let storyBoard = UIStoryboard(name: "Home", bundle: nil)
             let homeViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
             navigationController.viewControllers = [homeViewController]

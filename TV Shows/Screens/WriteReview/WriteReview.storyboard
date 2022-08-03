@@ -59,8 +59,8 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="200" id="jNo-mq-B19"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -124,6 +124,7 @@
                     <connections>
                         <outlet property="commentTextField" destination="aLU-UP-feQ" id="pPn-q6-FUi"/>
                         <outlet property="ratingView" destination="hWk-P8-rim" id="0IX-cZ-Fmh"/>
+                        <outlet property="scrollView" destination="iUh-RS-aqD" id="A5L-bJ-uk9"/>
                         <outlet property="submitButton" destination="Q1C-r3-jel" id="Ltu-Mg-ufl"/>
                     </connections>
                 </viewController>

@@ -26,6 +26,11 @@
                                     <constraint firstAttribute="width" constant="350" id="F2S-EB-6sf"/>
                                     <constraint firstAttribute="height" constant="350" id="vED-XO-u45"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4P-Nf-0Dd">
                                 <rect key="frame" x="0.0" y="350" width="350" height="20"/>

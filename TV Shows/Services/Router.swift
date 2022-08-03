@@ -32,7 +32,7 @@ enum Router : URLRequestConvertible {
             return "/shows/\(id)"
         case .showId(_, let id):
             return "/shows/\(id)/reviews"
-        case .postReview(_, _, _):
+        case .postReview:
             return "/reviews"
         }
     }
@@ -66,7 +66,7 @@ enum Router : URLRequestConvertible {
                 "page": "\(page)",
                 "items": "20"
             ]
-        case .displayShow(_):
+        case .displayShow:
             return [:]
         case .showId(let page, _):
             return [
@@ -90,10 +90,10 @@ enum Router : URLRequestConvertible {
             headers: HTTPHeaders(headers)
         )
         
-        switch self {
-        case .login, .register, .postReview:
+        switch method {
+        case .post, .put, .patch:
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        case .getUser, .shows, .displayShow, .showId:
+        default:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         }
         
