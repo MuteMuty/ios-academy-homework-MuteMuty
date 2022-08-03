@@ -10,6 +10,7 @@ import Alamofire
 
 enum Router : URLRequestConvertible {
     
+    case getUser
     case login(email: String, password: String)
     case register(email: String, password: String)
     case shows(page: Int)
@@ -19,6 +20,8 @@ enum Router : URLRequestConvertible {
     
     var path : String {
         switch self {
+        case .getUser:
+            return "/users/me"
         case .login:
             return "/users/sign_in"
         case .register:
@@ -38,13 +41,15 @@ enum Router : URLRequestConvertible {
         switch self {
         case .login, .register, .postReview:
             return .post
-        case .shows, .displayShow, .showId:
+        case .getUser, .shows, .displayShow, .showId:
             return .get
         }
     }
     
     var parameters : [String: String] {
         switch self {
+        case .getUser:
+            return [:]
         case .login(let email, let password):
             return [
                 "email": email,
@@ -88,7 +93,7 @@ enum Router : URLRequestConvertible {
         switch self {
         case .login, .register, .postReview:
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        case .shows, .displayShow, .showId:
+        case .getUser, .shows, .displayShow, .showId:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         }
         

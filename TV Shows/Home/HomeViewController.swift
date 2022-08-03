@@ -39,7 +39,11 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         tableView.dataSource = self
         tableView.delegate = self
+        getUser()
         getShows(page: currentPage)
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
     }
     
     private func getShows(page: Int) {
@@ -59,6 +63,29 @@ final class HomeViewController: UIViewController {
             }
         }
     }
+    
+    private func getUser() {
+        service.getUser {  [weak self] dataResponse in
+            guard let self = self else { return }
+            
+            switch dataResponse.result {
+            case .success(let userResponse):
+                self.user = userResponse.user
+            case .failure:
+                print("failure")
+            }
+        }
+    }
+    
+    @objc private func pullToRefresh() {
+        shows = []
+        currentPage = 1
+        getShows(page: currentPage)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.tableView.refreshControl?.endRefreshing()
+        }
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -71,7 +98,10 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: String(describing: ShowTableViewCell.self), for: indexPath
         ) as! ShowTableViewCell
-        cell.setup(with: ShowItem(showTitle: shows[indexPath.row].title, image: UIImage(named: "ic-profile.pdf")))
+        
+        
+        let show = shows[indexPath.row]
+        cell.setup(with: ShowItem(show: show))
         
         return cell
     }

@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import Kingfisher
 
 struct ShowItem {
-    let showTitle: String
-    let image: UIImage?
+    let show: Show
 }
 
 final class ShowTableViewCell: UITableViewCell {
@@ -18,8 +18,12 @@ final class ShowTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     func setup(with item: ShowItem) {
-        titleLabel.text = item.showTitle
-        thumbnailImageView.image = item.image
+        titleLabel.text = item.show.title
+        thumbnailImageView.kf.setImage(
+            with: item.show.imageUrl,
+            placeholder: UIImage(named: "ic-show-placeholder-vertical"),
+            options: [.transition(.fade(0.3))]
+        )
     }
 
 }

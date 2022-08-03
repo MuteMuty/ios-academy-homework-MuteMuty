@@ -10,12 +10,23 @@ import Alamofire
 
 final class Service {
     
+    func getUser(completion: @escaping (DataResponse<UserResponse, AFError>) -> Void) {
+        
+        AF
+            .request(Router.getUser)
+            .validate()
+            .responseDecodable(of: UserResponse.self) { dataResponse in
+                completion(dataResponse)
+            }
+    }
+    
     func register(email: String, password: String, completion: @escaping (DataResponse<UserResponse, AFError>) -> Void) {
         
         AF
             .request(Router.register(email: email, password: password))
             .validate()
             .responseDecodable(of: UserResponse.self) { dataResponse in
+                SessionManager.shared.storeAuthInfo(dataResponse: dataResponse)
                 completion(dataResponse)
             }
     }
@@ -26,6 +37,7 @@ final class Service {
             .request(Router.login(email: email, password: password))
             .validate()
             .responseDecodable(of: UserResponse.self) { dataResponse in
+                SessionManager.shared.storeAuthInfo(dataResponse: dataResponse)
                 completion(dataResponse)
             }
     }

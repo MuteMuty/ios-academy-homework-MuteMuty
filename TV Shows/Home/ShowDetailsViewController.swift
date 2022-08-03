@@ -62,6 +62,8 @@ class ShowDetailsViewController: UIViewController {
         
         tableView.register(UINib(nibName: "ShowInfoCell", bundle: nil), forCellReuseIdentifier: String(describing: ShowInfoCell.self))
         tableView.register(UINib(nibName: "ShowReviewCell", bundle: nil), forCellReuseIdentifier: String(describing: ShowReviewCell.self))
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
     }
     
     private func getShowId(page: Int, id: String) {
@@ -93,6 +95,14 @@ class ShowDetailsViewController: UIViewController {
             case .failure(let error):
                 print("Error: \(error)")
             }
+        }
+    }
+    
+    @objc private func pullToRefresh() {
+        reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
     

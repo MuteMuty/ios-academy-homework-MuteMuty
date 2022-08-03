@@ -18,6 +18,7 @@ final class ShowReviewCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var ratingView: RatingView!
+    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var reviewLable: UILabel!
     
     // MARK: - Properties
@@ -34,9 +35,16 @@ final class ShowReviewCell: UITableViewCell {
     }
     
     func setup(with item: ShowReviewItem) {
-        //profileImage.image = item.profileImage
+        profileImage.kf.setImage(
+            with: item.review.user.imageUrl,
+            placeholder: UIImage(named: "ic-profile-placeholder"),
+            options: [.transition(.fade(0.3))]
+        )
         emailLabel.text = item.review.user.email
         ratingView.setRoundedRating(Double(item.review.rating))
+        if item.review.comment.isEmpty {
+            emptyView.isHidden = true
+        }
         reviewLable.text = item.review.comment
     }
 }

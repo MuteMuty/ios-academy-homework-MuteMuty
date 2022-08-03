@@ -62,11 +62,18 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success(let userResponse):
-                SessionManager.shared.storeAuthInfo(dataResponse: dataResponse)
+                if self.isRememberMeClicked {
+                    if let authInfo = SessionManager.shared.authInfo {
+                        KeychainManager.addAuthInfo(authInfo: authInfo)
+                    }
+                }
                 homeViewController.user = userResponse.user
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:
-                self.showAlter(message: "Invalid login credentials. Please try again.")
+                self.animateEmailAndPasswordFields()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.showAlter(message: "Invalid login credentials. Please try again.")
+                }
             }
         }
     }
@@ -85,7 +92,11 @@ final class LoginViewController: UIViewController {
             
             switch dataResponse.result {
             case .success(let userResponse):
-                SessionManager.shared.storeAuthInfo(dataResponse: dataResponse)
+                if self.isRememberMeClicked {
+                    if let authInfo = SessionManager.shared.authInfo {
+                        KeychainManager.addAuthInfo(authInfo: authInfo)
+                    }
+                }
                 homeViewController.user = userResponse.user
                 self.navigationController?.setViewControllers([homeViewController], animated: true)
             case .failure:
@@ -134,6 +145,22 @@ final class LoginViewController: UIViewController {
         } else {
             disableButtons()
             loginButton.backgroundColor = UIColor(white: 1, alpha: 0.3)
+        }
+    }
+    
+    private func animateEmailAndPasswordFields() {
+        emailTextField.transform = CGAffineTransform(translationX: 12.0, y: 0)
+        passwordTextField.transform = CGAffineTransform(translationX: 12.0, y: 0)
+        
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 0.3,
+            initialSpringVelocity: 0.8,
+            options: .curveEaseInOut
+        ) {
+            self.emailTextField.transform = CGAffineTransform.identity
+            self.passwordTextField.transform = CGAffineTransform.identity
         }
     }
     

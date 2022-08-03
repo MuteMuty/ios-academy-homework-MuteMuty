@@ -31,12 +31,18 @@ final class ShowInfoCell: UITableViewCell {
     
     func setup(with item: ShowInfoItem) {
         showDescriptionLabel.text = item.show.description
-        //showImage.image = item.image
+        showImage.kf.setImage(
+            with: item.show.imageUrl,
+            placeholder: UIImage(named: "ic-show-placeholder-rectangle"),
+            options: [.transition(.fade(0.3)), .progressiveJPEG(.init())]
+        )
         if item.show.noOfReviews > 0 {
             noReviewsLabel.text = "\(item.show.noOfReviews) REVIEWS, \(item.show.averageRating!) AVERAGE"
             noReviewsLabel.textAlignment = .left
+            ratingView.setRoundedRating(item.show.averageRating!)
+        } else {
+            ratingView.isHidden = true
         }
-        ratingView.setRoundedRating(item.show.averageRating!)
     }
     
 }
