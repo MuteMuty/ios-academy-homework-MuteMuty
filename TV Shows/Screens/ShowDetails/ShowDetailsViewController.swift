@@ -111,40 +111,45 @@ class ShowDetailsViewController: UIViewController {
 extension ShowDetailsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : reviews.count
+        switch sections[section] {
+        case .infoCell:
+            return 1
+        case .reviewCell:
+            return reviews.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let show = show else { return UITableViewCell() }
         switch sections[indexPath.section] {
-            case .infoCell:
-                let infoCell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: ShowInfoCell.self),
-                    for: indexPath
-                ) as! ShowInfoCell
+        case .infoCell:
+            let infoCell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: ShowInfoCell.self),
+                for: indexPath
+            ) as! ShowInfoCell
 
-                infoCell.setup(with: ShowInfoItem(show: show))
+            infoCell.setup(with: ShowInfoItem(show: show))
 
-                return infoCell
-            case .reviewCell:
-                let reviewCell = tableView.dequeueReusableCell(
-                    withIdentifier: String(describing: ShowReviewCell.self),
-                    for: indexPath
-                ) as! ShowReviewCell
+            return infoCell
+        case .reviewCell:
+            let reviewCell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: ShowReviewCell.self),
+                for: indexPath
+            ) as! ShowReviewCell
 
-                let review = reviews[indexPath.row]
-                reviewCell.setup(with: ShowReviewItem(review: review))
+            let review = reviews[indexPath.row]
+            reviewCell.setup(with: ShowReviewItem(review: review))
 
-                if currentPage < allPages && indexPath.row + 1 == reviews.count {
-                    currentPage += 1
-                    getShowId(page: currentPage, id: show.id)
-                }
+            if currentPage < allPages && indexPath.row + 1 == reviews.count {
+                currentPage += 1
+                getShowId(page: currentPage, id: show.id)
+            }
 
-                return reviewCell
+            return reviewCell
         }
     }
 }

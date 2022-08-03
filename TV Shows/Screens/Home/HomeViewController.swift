@@ -88,7 +88,7 @@ final class HomeViewController: UIViewController {
         notificationToken = NotificationCenter
             .default
             .addObserver(
-                forName: Notification.Name(rawValue: "logout"),
+                forName: Constants.Notifications.logout,
                 object: nil,
                 queue: nil
             ) {

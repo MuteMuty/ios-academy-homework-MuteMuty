@@ -58,7 +58,7 @@ class ProfileDetailsViewController: UIViewController {
         dismiss(animated: true) {
             KeychainManager.removeUserInfo()
             SessionManager.shared.authInfo = nil
-            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "logout")))
+            NotificationCenter.default.post(Notification(name: Constants.Notifications.logout))
         }
     }
 }
